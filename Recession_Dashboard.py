@@ -1,4 +1,4 @@
-# Import required libraries
+# Importing required libraries
 import pandas as pd
 import dash
 from dash import dcc
@@ -6,13 +6,13 @@ from dash import html
 from dash.dependencies import Input, Output
 import plotly.express as px
 
-# Read the airline data into pandas dataframe
+# Reading the automobile data into pandas dataframe
 df =  pd.read_csv('historical_automobile_sales.csv')
 
-# Create a dash application
+# Creating the dash application
 app = dash.Dash(__name__)
 
-# Build dash app layout
+# Building the dash app layout
 app.layout = html.Div(children=[ html.H1('Automobile Sales Statistics Dashboard', 
                                 style={'textAlign': 'center', 'color': '#503D36',
                                 'font-size': 24}),
@@ -43,7 +43,7 @@ app.layout = html.Div(children=[ html.H1('Automobile Sales Statistics Dashboard'
                                 ])
                                 
 
-    
+# Adding app callbacks for interactivity
 @app.callback(
     Output(component_id = 'select-year', component_property = 'disabled'),
     Input(component_id = 'dropdown-statistics', component_property = 'value')
@@ -64,7 +64,8 @@ def update_input_container(stats_value):
 def update_output_container(stats_value, year_value):
     if stats_value == 'Recession Period Statistics':
         rec_df = df.loc[df['Recession'] == 1]
-        #Plot 1 Automobile sales fluctuate over Recession Period (year wise) using line chart
+      
+        #Plot 1 Automobile sales fluctuation over Recession Period (year wise) using line chart
         year_sales = rec_df.groupby('Year')['Automobile_Sales'].mean().reset_index()
         R_chart1 = dcc.Graph(
             figure = px.line(
@@ -75,7 +76,7 @@ def update_output_container(stats_value, year_value):
             )
         )
 
-        #Plot 2 Calculate the average number of vehicles sold by vehicle type and represent as a Bar chart
+        #Plot 2 Calculating the average number of vehicles sold by vehicle type and representing as a Bar chart
         veh_sold = rec_df.groupby('Vehicle_Type')['Automobile_Sales'].mean().reset_index()
         R_chart2 = dcc.Graph(
             figure = px.bar(
@@ -98,7 +99,7 @@ def update_output_container(stats_value, year_value):
             )
         )
 
-        #Plot 4 Develop a Bar chart for the effect of unemployment rate on vehicle type and sales
+        #Plot 4 Bar chart for the effect of unemployment rate on vehicle type and sales
         unemp_eff = rec_df.groupby(['unemployment_rate', 'Vehicle_Type'])['Automobile_Sales'].mean().reset_index()
         R_chart4 = dcc.Graph(
             figure = px.bar(
@@ -117,6 +118,7 @@ def update_output_container(stats_value, year_value):
 
     elif (year_value and stats_value == 'Yearly Statistics'):
         year_df = df.loc[df['Year'] == year_value]
+      
         #Plot 1 Yearly Automobile sales using line chart for the whole period.
         year_sales = df.groupby('Year')['Automobile_Sales'].mean().reset_index()
         Y_chart1 = dcc.Graph(
