@@ -15,7 +15,7 @@ app = dash.Dash(__name__)
 # Building the dash app layout
 app.layout = html.Div(children=[ html.H1('Automobile Sales Statistics Dashboard', 
                                 style={'textAlign': 'center', 'color': '#503D36',
-                                'font-size': 24}),
+                                'font-size': 40, 'font-family' : 'Arial'}),
                                 dcc.Dropdown(
                                     id = 'dropdown-statistics',
                                     options = [
@@ -24,20 +24,20 @@ app.layout = html.Div(children=[ html.H1('Automobile Sales Statistics Dashboard'
                                     ],
                                     placeholder = 'Select a report type',
                                     value = 'Select Statistics',
-                                    style = { 'width' : '80%', 'padding' : '3px', 'font-size' : '20px', 'text-align' : 'center' }
+                                    style = { 'width' : '80%', 'padding' : '3px', 'font-size' : '20px', 'text-align' : 'center', 'margin' : '0 auto', 'font-family' : 'Arial' }
                                 ),
                                 dcc.Dropdown(
                                     id = 'select-year',
                                     options = [ {'label' : i, 'value' : i} for i in range(1980,2014) ],
                                     placeholder = 'Select year',
                                     value = 'Select year',
-                                    style = { 'width' : '80%', 'padding' : '3px', 'font-size' : '20px', 'text-align' : 'center' }
+                                    style = { 'width' : '80%', 'padding' : '3px', 'font-size' : '20px', 'text-align' : 'center', 'margin' : '0 auto', 'font-family' : 'Arial' }
                                 ),
                                 html.Div([
                                     html.Div(
                                         id = 'output-container',
                                         className = 'chart-grid',
-                                        style = { 'display' : 'flex' , 'flex-direction' : 'column'}
+                                        style = { 'display' : 'flex' , 'flex-direction' : 'column', 'margin' : '0 auto', 'justify-content' : 'center', 'align-items' : 'center', 'gap' : '30px', 'font-family' : 'Arial' }
                                     )
                                 ])
                                 ])
@@ -112,8 +112,8 @@ def update_output_container(stats_value, year_value):
         )
 
         return [
-            html.Div(className = 'chart-item', children = [html.Div(children = R_chart1),html.Div(children = R_chart2)]),
-            html.Div(className = 'chart-item', children = [html.Div(children = R_chart3),html.Div(children = R_chart4)])
+            html.Div(className = 'chart-item', children = [html.Div(children = R_chart1),html.Div(children = R_chart2)], style={'display': 'flex', 'flex-direction' : 'row'}),
+            html.Div(className = 'chart-item', children = [html.Div(children = R_chart3),html.Div(children = R_chart4)], style={'display': 'flex', 'flex-direction' : 'row'})
         ]
 
     elif (year_value and stats_value == 'Yearly Statistics'):
@@ -165,8 +165,8 @@ def update_output_container(stats_value, year_value):
         )
 
         return [
-            html.Div(className = 'chart-item', children = [html.Div(children = Y_chart1), html.Div(children = Y_chart2)],style={'display': 'flex'}),
-            html.Div(className = 'chart-item', children = [html.Div(children = Y_chart3), html.Div(children = Y_chart4)],style={'display': 'flex'})
+            html.Div(className = 'chart-item', children = [html.Div(children = Y_chart1), html.Div(children = Y_chart2)],style={'display': 'flex', 'flex-direction' : 'row'}),
+            html.Div(className = 'chart-item', children = [html.Div(children = Y_chart3), html.Div(children = Y_chart4)],style={'display': 'flex', 'flex-direction' : 'row'})
         ]
 
 
