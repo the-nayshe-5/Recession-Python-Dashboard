@@ -1,5 +1,6 @@
 # Recession-Python-Dashboard
-Interactive Dashboard using Python and Dash, based on Automobile Sales data.
+Interactive Dashboard using Python and Dash, based on Automobile Sales data. <br>
+The dashboard aims at using KPI to indicate the impact of recession on automobile sales.
 
 ## How to Access The Project
 
